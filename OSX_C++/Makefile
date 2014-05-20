@@ -41,11 +41,11 @@ src_to_obj = $(call make_path,.o, $(SRC_DIR), $(OBJ_DIR), $(1))
 
 # Rules for compiling targets
 # b
-# 	cp ./*.vert	$(BIN_DIR)
-#	cp ./*.tessctl	$(BIN_DIR)
-#	cp ./*.tessevl	$(BIN_DIR)
-#	cp ./*.geom	$(BIN_DIR)
-#	cp ./*.frag	$(BIN_DIR)
+ 	cp ./*.vert	$(BIN_DIR)
+	cp ./*.tessctl	$(BIN_DIR)
+	cp ./*.tessevl	$(BIN_DIR)
+	cp ./*.geom	$(BIN_DIR)
+	cp ./*.frag	$(BIN_DIR)
 
 $(BIN_DIR)/main: $(OBJ_DIR)/main.o $(OBJ_DIR)/shaderprogram.o  $(OBJ_DIR)/shader.o
 	mkdir -p $(BIN_DIR)
