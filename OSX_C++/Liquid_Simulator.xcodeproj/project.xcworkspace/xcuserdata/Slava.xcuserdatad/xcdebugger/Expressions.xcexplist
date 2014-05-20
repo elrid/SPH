@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "display():main.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "init():main.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "liquid">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "step():main.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "liquid[10]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>
