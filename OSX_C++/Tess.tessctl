@@ -6,10 +6,10 @@ uniform float TessLevelOuter;
 
 layout(vertices = 3) out;
 
-in dvec3 vPosition[];
-in dvec3 vNormal[];
-out dvec3 tcPosition[];
-out dvec3 tcNormal[];
+in vec3 vPosition[];
+in vec3 vNormal[];
+out vec3 tcPosition[];
+out vec3 tcNormal[];
 
 
 #define ID gl_InvocationID

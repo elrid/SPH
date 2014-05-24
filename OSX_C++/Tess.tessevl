@@ -2,37 +2,37 @@
 
 
 layout(triangles, equal_spacing, cw) in;
-in dvec3 tcPosition[];
-in dvec3 tcNormal[];
-out dvec3 tePosition;
-out dvec3 teWorldPosition;
-out dvec3 teNormal;
-uniform dmat4 Projection;
+in vec3 tcPosition[];
+in vec3 tcNormal[];
+out vec3 tePosition;
+out vec3 teWorldPosition;
+out vec3 teNormal;
+uniform mat4 Projection;
 uniform int generateNormals;
-uniform dmat4 Modelview;
-uniform dmat4 ModelMatrix;
+uniform mat4 Modelview;
+uniform mat4 ModelMatrix;
 
-dvec3 Pi(dvec3 q, int i, mat3 normals)
+vec3 Pi(vec3 q, int i, mat3 normals)
 {
-    dvec3 tr = q-tcPosition[i];
+    vec3 tr = q-tcPosition[i];
     return q - dot(tr,normals[i])*normals[i];
 }
 
-dvec3 normlze(dvec3 _in)
+vec3 normlze(vec3 _in)
 {
     float len = sqrt(float(_in.x*_in.x + _in.y*_in.y + _in.z*_in.z));
-    return _in/double(len);
+    return _in/float(len);
 }
 
 void main()
 {
     mat3 normals;
 
-    dmat3 p = mat3(tcPosition[0],tcPosition[1], tcPosition[2]);
+    mat3 p = mat3(tcPosition[0],tcPosition[1], tcPosition[2]);
     
-    double u = gl_TessCoord.x;
-    double v = gl_TessCoord.y;
-    double w = gl_TessCoord.z;
+    float u = gl_TessCoord.x;
+    float v = gl_TessCoord.y;
+    float w = gl_TessCoord.z;
 
     for(int i=0; i<3; i++)
     {
@@ -42,7 +42,7 @@ void main()
             normals[i] = vec3(tcNormal[i]);
     }
 
-    double alpha = 1;
+    float alpha = 1;
     bool isPlanet = true;
     tePosition = u*p[0] + v*p[1] + w*p[2];
     if(isPlanet)
@@ -55,7 +55,7 @@ void main()
     }
 
     teNormal = (u*normals[0] + v*normals[1] + w*normals[2]);
-    teNormal = normlze((ModelMatrix*dvec4(teNormal, 1) - ModelMatrix*dvec4(0,0,0, 1)).xyz);
-    teWorldPosition = (ModelMatrix * dvec4(tePosition, 1)).xyz;
+    teNormal = normlze((ModelMatrix*vec4(teNormal, 1) - ModelMatrix*vec4(0,0,0, 1)).xyz);
+    teWorldPosition = (ModelMatrix * vec4(tePosition, 1)).xyz;
     gl_Position = vec4(Projection * Modelview * dvec4(tePosition, 1));
 }
