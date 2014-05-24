@@ -15,7 +15,7 @@ main = do
   depthFunc $= Just Less -- the comparison function for depth the buffer
   angle <- newIORef 0
   delta <- newIORef 0.1
-  pos <- newIORef (0.3, 0)
+  pos <- newIORef (0.1, 0)
   lqpoints <- newIORef (points 4) -- it's 2 * n^3 amount of points
   lighting $= Enabled
   
