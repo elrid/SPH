@@ -3,20 +3,19 @@ import Graphics.UI.GLUT
 import Data.IORef
 import Bindings
 import Points
+import Types
  
 main :: IO ()
 main = do
   (_progName, _args) <- getArgsAndInitialize
   initialDisplayMode $= [WithDepthBuffer, WithAlphaComponent, DoubleBuffered, Multisampling, WithSamplesPerPixel 4]
-
+  --marshalContextProfile <-glut_CORE_PROFILE
+  --setContextVersion (3,2)
   _window <- createWindow "Fluid simulation"
   windowSize $= (Size 500 (500::GLsizei))
   reshapeCallback $= Just reshape
   depthFunc $= Just Less -- the comparison function for depth the buffer
-  angle <- newIORef 0
-  delta <- newIORef 0.1
-  pos <- newIORef (0.1, 0)
-  lqpoints <- newIORef (points 4) -- it's 2 * n^3 amount of points
+  s <- newIORef (State (0.1, 0) (points 6)) -- it's 2 * n^3 amount of points
   lighting $= Enabled
   
   ambient (Light 0) $= Color4 0.1 0.1 0.5 (0.1::GLfloat)
@@ -33,7 +32,7 @@ main = do
 
   blend $= Enabled
   blendFunc $= (SrcAlpha, OneMinusSrcAlpha)
-  keyboardMouseCallback $= Just (keyboardMouse delta pos)
-  idleCallback $= Just (idle angle delta lqpoints)
-  displayCallback $= display angle pos lqpoints
+  keyboardMouseCallback $= Just (keyboardMouse s)
+  idleCallback $= Just (idle s)
+  displayCallback $= display s
   mainLoop
