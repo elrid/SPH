@@ -12,7 +12,7 @@ main = do
   --marshalContextProfile <-glut_CORE_PROFILE
   --setContextVersion (3,2)
   _window <- createWindow "Fluid simulation"
-  windowSize $= (Size 500 (500::GLsizei))
+  windowSize $= (Size 1000 (1000::GLsizei))
   reshapeCallback $= Just reshape
   depthFunc $= Just Less -- the comparison function for depth the buffer
   s <- newIORef (State (0.1, 0) (points 6)) -- it's 2 * n^3 amount of points
